@@ -100,7 +100,6 @@ ctx.textAlign = "center";
 const details = [
   { key: "Name", value: submittedRSVP.name },
   { key: "Family", value: submittedRSVP.side },
-  { key: "Guests", value: submittedRSVP.guests.toString() },
 ];
 
 // vertical spacing
@@ -128,7 +127,7 @@ details.forEach((item, index) => {
       ctx.font = "bold 18px Arial";
       ctx.textAlign = "left";
       ctx.fillStyle = "#e0f2e9";
-      ctx.fillText("Save this card for entry", 100, 520);
+      ctx.fillText(`This access card is valid for ${submittedRSVP.guests} guest(s)`, 100, 520);
   
       ctx.textAlign = "right";
       ctx.fillText("#BD2025 🎉", canvas.width - 50, 520);
@@ -290,7 +289,7 @@ details.forEach((item, index) => {
 
             {/* Footer */}
             <div className="mt-6 flex justify-between items-center text-sm">
-              <span className="text-green-100">Save this card for entry</span>
+              <span className="text-green-100">This access card is valid for submittedRSVP.guests guest(s)</span>
               <span className="font-bold text-green-100">#OD2025 🎉</span>
             </div>
           </div>
@@ -300,10 +299,11 @@ details.forEach((item, index) => {
             onClick={handleDownload}
             className="mt-6 flex items-center gap-2 px-4 py-2 rounded-lg bg-green-700 text-white hover:bg-green-800 mx-auto transition-colors"
           >
-            <Download className="w-4 h-4" /> Download Card
+            <Download className="w-4 h-4" /> Save this card for entry
           </button>
         </div>
       )}
     </div>
   );
+  
 };
