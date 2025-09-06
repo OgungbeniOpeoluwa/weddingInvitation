@@ -78,11 +78,11 @@ button:hover {
 /* Optional light mode */
 @media (prefers-color-scheme: light) {
   :root {
-    color: #fff;
-    background: linear-gradient(135deg, #065f46, #556B2F);
+    background: linear-gradient(135deg, #ffe5d9, #ffbfa3); /* peach tones */
+    color: #213547;
   }
   h1 {
-    color: #ffe5d9; /* emerald text */
+    color: #065f46; /* emerald text */
   }
   button {
     background-color: #556B2F; /* olive */

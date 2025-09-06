@@ -113,11 +113,7 @@ details.forEach((item, index) => {
 
   
      
-  
-    //   ctx.fillText(submittedRSVP.name, canvas.width / 2, 220);
-    //   ctx.fillText(guestSide, canvas.width / 2, 280);
-    //   ctx.fillText(`${submittedRSVP.guests}`, canvas.width / 2, 340);
-  
+
       // Thank you message
       ctx.font = "italic 24px serif";
       ctx.textAlign = "center";
@@ -295,7 +291,7 @@ details.forEach((item, index) => {
             {/* Footer */}
             <div className="mt-6 flex justify-between items-center text-sm">
               <span className="text-green-100">Save this card for entry</span>
-              <span className="font-bold text-green-100">#BD2025 🎉</span>
+              <span className="font-bold text-green-100">#OD2025 🎉</span>
             </div>
           </div>
 

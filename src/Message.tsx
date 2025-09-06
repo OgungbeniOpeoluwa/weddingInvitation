@@ -79,7 +79,7 @@ interface WeddingData {
 // Example Data
 // -----------------------------
 const example: WeddingData = {
-  couple: { first: "Opeoluwa", second: "Adedamola" ,HashTag:"#BD2025",},
+  couple: { first: "Opeoluwa", second: "Adedamola" ,HashTag:"#OD2025",},
   dateISO: "2025-11-20T12:00:00+01:00",
   ceremony: {
     title: "Engagement Ceremony",
