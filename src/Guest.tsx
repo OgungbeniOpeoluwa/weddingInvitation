@@ -87,52 +87,44 @@ export const GuestRegistration: React.FC = () => {
       ctx.textAlign = "center";
       ctx.fillText("✨ Wedding Access Card ✨", canvas.width / 2, 100);
   
-      // --- RSVP Details ---
-     // --- RSVP Details (key-value, centered) ---
-ctx.fillStyle = "#ffffff";
-ctx.font = "bold 28px 'Montserrat', sans-serif";
-ctx.textAlign = "center";
-
-
-// const guestSide = submittedRSVP.side === "bride" ? "Bride Guest" : "Groom Guest";
-
-
-const details = [
-  { key: "Name", value: submittedRSVP.name },
-  { key: "Family", value: submittedRSVP.side },
-];
-
-// vertical spacing
-const startY = 220;
-const spacing = 60;
-
-details.forEach((item, index) => {
-  ctx.fillText(`${item.key}: ${item.value}`, canvas.width / 2, startY + index * spacing);
-});
-
-  
-     
-
-      // Thank you message
-      ctx.font = "italic 24px serif";
+      // --- RSVP Name only ---
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "bold 36px cursive"; // stylish cursive for name
       ctx.textAlign = "center";
+      ctx.fillText(submittedRSVP.name, canvas.width / 2, 220);
+  
+      // Side info (Bride/Groom)
+      ctx.font = "24px italic serif";
+      ctx.fillStyle = "#e6ffe6";
+      ctx.fillText(
+        submittedRSVP.side === "bride" ? "Bride's Side" : "Groom's Side",
+        canvas.width / 2,
+        270
+      );
+  
+      // Thank you message
+      ctx.font = "italic 22px serif";
       ctx.fillStyle = "#bbf7d0";
       ctx.fillText(
         "Thank you for blessing us with your presence 💚",
         canvas.width / 2,
-        420
+        340
       );
   
-      // Footer
+      // Footer (guests + hashtag)
       ctx.font = "bold 18px Arial";
       ctx.textAlign = "left";
       ctx.fillStyle = "#e0f2e9";
-      ctx.fillText(`This access card is valid for ${submittedRSVP.guests} guest(s)`, 100, 520);
+      ctx.fillText(
+        `Valid for ${submittedRSVP.guests} guest(s)`,
+        100,
+        500
+      );
   
       ctx.textAlign = "right";
-      ctx.fillText("#BD2025 🎉", canvas.width - 50, 520);
+      ctx.fillText("#BD2025 🎉", canvas.width - 60, 500);
   
-      // --- Rounded Border wrapping circles and text ---
+      // Rounded Border
       function drawRoundedRect(
         ctx: CanvasRenderingContext2D,
         x: number,
@@ -142,20 +134,20 @@ details.forEach((item, index) => {
         radius: number
       ) {
         ctx.beginPath();
-        ctx.moveTo(x + radius, y); // top-left corner
-        ctx.lineTo(x + width - radius, y); // top edge
-        ctx.quadraticCurveTo(x + width, y, x + width, y + radius); // top-right corner
-        ctx.lineTo(x + width, y + height - radius); // right edge
-        ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height); // bottom-right corner
-        ctx.lineTo(x + radius, y + height); // bottom edge
-        ctx.quadraticCurveTo(x, y + height, x, y + height - radius); // bottom-left corner
-        ctx.lineTo(x, y + radius); // left edge
-        ctx.quadraticCurveTo(x, y, x + radius, y); // top-left corner
+        ctx.moveTo(x + radius, y);
+        ctx.lineTo(x + width - radius, y);
+        ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+        ctx.lineTo(x + width, y + height - radius);
+        ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+        ctx.lineTo(x + radius, y + height);
+        ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+        ctx.lineTo(x, y + radius);
+        ctx.quadraticCurveTo(x, y, x + radius, y);
         ctx.closePath();
         ctx.stroke();
       }
   
-      const borderMargin = 40; // leave some space around circles and text
+      const borderMargin = 40;
       const borderRadius = 30;
   
       ctx.strokeStyle = "#FFD700"; // gold border
@@ -186,6 +178,7 @@ details.forEach((item, index) => {
       console.error("Error generating card:", error);
     }
   };
+  
   
 
   return (
