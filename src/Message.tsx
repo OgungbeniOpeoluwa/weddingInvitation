@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react"
+
 // Instead of `import QRCode from "qrcode.react";`
 import { motion } from "framer-motion"
 import { GuestRegistration } from "./Guest"
@@ -15,6 +15,7 @@ import {
   Users,
   Home,
 } from "lucide-react"
+import { useState, useMemo } from "react"
 
 // -----------------------------
 // Types
