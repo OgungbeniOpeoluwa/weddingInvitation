@@ -127,8 +127,9 @@ const example: WeddingData = {
     },
   ],
   rsvpList: [
-    { name: "Lawal Nafisat", contact: "08012345678", side: "bride", },
+    { name: "Nafisat Lawal", contact: "07057781992", side: "bride", },
     { name: "Tolu Adefiranye",contact: "08165810242", side: "groom", },
+    { name: "Kenneth Chukwu",contact: "08028455571", side: "groom", }
   ],
   rsvp: { link: "" },
   gifts: {
