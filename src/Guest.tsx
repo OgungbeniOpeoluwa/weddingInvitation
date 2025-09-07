@@ -259,9 +259,14 @@ export const GuestRegistration: React.FC = () => {
           min={1}
           max={5}
           value={formData.guests}
-          onChange={(e) =>
-            handleInputChange("guests", parseInt(e.target.value) || 1)
-          }
+          onChange={(e) => {
+            const value = parseInt(e.target.value) || 1;
+            if (value > 5) {
+              alert("You can only register up to 5 guests.");
+              return;
+            }
+            handleInputChange("guests", value);
+          }}
           className="border border-gray-300 rounded-lg p-2 focus:outline-none text-black"
           placeholder="Number of Guests"
         />
