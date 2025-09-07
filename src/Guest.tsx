@@ -1,11 +1,18 @@
 import React, { useState, useRef } from "react";
 import { Send, Download, Users } from "lucide-react";
+import { supabase } from "../supabaseClient"; // adjust path
+import QRCode from "qrcode";
+
+
+
 
 type RSVP = {
   name: string;
   contact: string;
   side: "bride" | "groom";
   guests: number;
+  code: string
+  
 };
 
 export const GuestRegistration: React.FC = () => {
@@ -15,6 +22,7 @@ export const GuestRegistration: React.FC = () => {
     contact: "",
     side: "" as "bride" | "groom" | "",
     guests: 1,
+
   });
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -25,22 +33,37 @@ export const GuestRegistration: React.FC = () => {
     }));
   };
 
-  const handleSubmit = () => {
+
+  const handleSubmit = async () => {
     if (!formData.name || !formData.contact || !formData.side) {
       alert("Please fill in all fields");
       return;
     }
-
-    const rsvp: RSVP = {
-      name: formData.name,
-      contact: formData.contact,
-      side: formData.side as "bride" | "groom",
-      guests: formData.guests,
-    };
-
+  
+    const { data, error } = await supabase
+      .from("rsvp")
+      .insert([
+        {
+          name: formData.name,
+          contact: formData.contact,
+          side: formData.side,
+          guests: formData.guests,
+          valid_until: "2025-02-01T00:00:00Z"
+        }
+      ])
+      .select();  // returns new row including auto-generated code
+  
+    if (error) {
+      console.error("Error saving RSVP:", error);
+      alert(`Failed to register. Please try again. ${error.message}`);
+      return;
+    }
+  
+    const rsvp = data[0]; // includes name, contact, side, guests, and code
+  
     setSubmittedRSVP(rsvp);
     alert("Thank you for registering!");
-
+  
     // Reset form
     setFormData({
       name: "",
@@ -49,6 +72,7 @@ export const GuestRegistration: React.FC = () => {
       guests: 1,
     });
   };
+  
 
   const handleDownload = async () => {
     if (!submittedRSVP) return;
@@ -87,13 +111,13 @@ export const GuestRegistration: React.FC = () => {
       ctx.textAlign = "center";
       ctx.fillText("✨ Wedding Access Card ✨", canvas.width / 2, 100);
   
-      // --- RSVP Name only ---
+      // --- RSVP Name ---
       ctx.fillStyle = "#ffffff";
-      ctx.font = "bold 36px cursive"; // stylish cursive for name
+      ctx.font = "bold 36px cursive";
       ctx.textAlign = "center";
       ctx.fillText(submittedRSVP.name, canvas.width / 2, 220);
   
-      // Side info (Bride/Groom)
+      // Side info
       ctx.font = "24px italic serif";
       ctx.fillStyle = "#e6ffe6";
       ctx.fillText(
@@ -111,15 +135,11 @@ export const GuestRegistration: React.FC = () => {
         340
       );
   
-      // Footer (guests + hashtag)
+      // Footer
       ctx.font = "bold 18px Arial";
       ctx.textAlign = "left";
       ctx.fillStyle = "#e0f2e9";
-      ctx.fillText(
-        `Valid for ${submittedRSVP.guests} guest(s)`,
-        100,
-        500
-      );
+      ctx.fillText(`Valid for ${submittedRSVP.guests} guest(s)`, 100, 500);
   
       ctx.textAlign = "right";
       ctx.fillText("#BD2025 🎉", canvas.width - 60, 500);
@@ -161,23 +181,42 @@ export const GuestRegistration: React.FC = () => {
         borderRadius
       );
   
-      // --- Download ---
-      canvas.toBlob((blob) => {
-        if (blob) {
-          const url = URL.createObjectURL(blob);
-          const link = document.createElement("a");
-          link.href = url;
-          link.download = `RSVP_Card_${submittedRSVP.name.replace(/\s+/g, "_")}.png`;
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          URL.revokeObjectURL(url);
-        }
+      // --- QR Code Section ---
+      const qrDataUrl = await QRCode.toDataURL(submittedRSVP.code, {
+        margin: 1,
+        width: 150,
+        color: {
+          dark: "#000000",
+          light: "#ffffff",
+        },
       });
+  
+      const qrImg = new Image();
+      qrImg.src = qrDataUrl;
+  
+      qrImg.onload = () => {
+        // draw QR bottom center
+        ctx.drawImage(qrImg, canvas.width / 2 - 75, 370, 150, 150);
+  
+        // Download only after QR is drawn
+        canvas.toBlob((blob) => {
+          if (blob) {
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = `RSVP_Card_${submittedRSVP.name.replace(/\s+/g, "_")}.png`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+          }
+        });
+      };
     } catch (error) {
       console.error("Error generating card:", error);
     }
   };
+  
   
   
 
@@ -282,7 +321,7 @@ export const GuestRegistration: React.FC = () => {
 
             {/* Footer */}
             <div className="mt-6 flex justify-between items-center text-sm">
-              <span className="text-green-100">This access card is valid for submittedRSVP.guests guest(s)</span>
+              <span className="text-green-100">This access card is valid for {submittedRSVP.guests} guest(s)</span>
               <span className="font-bold text-green-100">#OD2025 🎉</span>
             </div>
           </div>
