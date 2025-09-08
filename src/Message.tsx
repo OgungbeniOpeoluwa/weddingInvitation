@@ -11,7 +11,7 @@ import {
   Phone,
   Link as LinkIcon,
   Copy,
-  Share2,
+//   Share2,
   Users,
   Home,
 } from "lucide-react"
@@ -163,29 +163,29 @@ export default function WeddingInvite() {
   const [data] = useState<WeddingData>(example)
   const longDate = useMemo(() => formatLongDate(data.dateISO), [data.dateISO])
 
-  const pageUrl =
-    typeof window !== "undefined" ? window.location.href : "https://invite.com"
+//   const pageUrl =
+//     typeof window !== "undefined" ? window.location.href : "https://invite.com"
 
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(pageUrl)
-      alert("Link copied!")
-    } catch {
-      alert("Couldn't copy. Please copy manually.")
-    }
-  }
+//   const handleCopy = async () => {
+//     try {
+//       await navigator.clipboard.writeText(pageUrl)
+//       alert("Link copied!")
+//     } catch {
+//       alert("Couldn't copy. Please copy manually.")
+//     }
+//   }
 
-  const handleShare = async () => {
-    try {
-      if (navigator.share) {
-        await navigator.share({ title: "Wedding Invite", url: pageUrl })
-      } else {
-        await handleCopy()
-      }
-    } catch {
-      /* user canceled */
-    }
-  }
+//   const handleShare = async () => {
+//     try {
+//       if (navigator.share) {
+//         await navigator.share({ title: "Wedding Invite", url: pageUrl })
+//       } else {
+//         await handleCopy()
+//       }
+//     } catch {
+//       /* user canceled */
+//     }
+//   }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-peach-100 via-white to-olive-50 text-gray-800">
@@ -206,7 +206,7 @@ export default function WeddingInvite() {
             <CalendarDays className="w-5 h-5" /> {longDate}
           </p>
 
-          <div className="mt-8 flex items-center justify-center gap-3">
+          {/* <div className="mt-8 flex items-center justify-center gap-3">
             <button
               onClick={handleShare}
               className="flex items-center gap-2 px-4 py-2 rounded-lg bg-burnt-orange-600 hover:bg-burnt-orange-700"
@@ -219,7 +219,7 @@ export default function WeddingInvite() {
             >
               <Copy className="w-4 h-4" /> Copy Link
             </button>
-          </div>
+          </div> */}
         </motion.div>
       </section>
 

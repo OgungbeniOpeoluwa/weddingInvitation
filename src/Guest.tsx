@@ -257,11 +257,11 @@ export const GuestRegistration: React.FC = () => {
         <input
           type="number"
           min={1}
-          max={5}
+          max={2}
           value={formData.guests}
           onChange={(e) => {
             const value = parseInt(e.target.value) || 1;
-            if (value > 5) {
+            if (value > 2) {
               alert("You can only register up to 5 guests.");
               return;
             }
