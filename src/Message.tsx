@@ -1,7 +1,7 @@
 
 // Instead of `import QRCode from "qrcode.react";`
 import { motion } from "framer-motion"
-import { GuestRegistration } from "./Guest"
+// import { GuestRegistration } from "./Guest"
 import {
   CalendarDays,
   Clock,
@@ -87,7 +87,7 @@ const example: WeddingData = {
       "Abuleoko road off cele bus stop beside top crown Magboro Ogun State",
     mapsLink:
       "https://www.google.com/maps/place/TOP+Crown+Hotel+and+Suites/@6.7158551,3.3938726,17z/data=!3m1!4b1!4m9!3m8!1s0x103b95ab00036f61:0x6d99131459ae67bf!5m2!4m1!1i2!8m2!3d6.7158551!4d3.3964475!16s%2Fg%2F11s1pnz65_?hl=en&entry=ttu&g_ep=EgoyMDI1MDkwMy4wIKXMDSoASAFQAw%3D%3D",
-    time: "10:00 AM",
+    time: "11:00 AM",
     EventCenter: "Strong Tower",
   },
   reception: {
@@ -95,13 +95,13 @@ const example: WeddingData = {
     address:
       "Abuleoko road off cele bus stop beside top crown Magboro Ogun State",
     mapsLink: "https://www.google.com/maps/place/TOP+Crown+Hotel+and+Suites/@6.7158551,3.3938726,17z/data=!3m1!4b1!4m9!3m8!1s0x103b95ab00036f61:0x6d99131459ae67bf!5m2!4m1!1i2!8m2!3d6.7158551!4d3.3964475!16s%2Fg%2F11s1pnz65_?hl=en&entry=ttu&g_ep=EgoyMDI1MDkwMy4wIKXMDSoASAFQAw%3D%3D",
-    time: "12:00 PM",
+    time: "1:00 PM",
     EventCenter:"Strong Tower",
   },
   dressCode: "Dress to show your side with pride",
   outfits: {
-    brideSide: "White & Burn orange",
-    groomSide: "White & Gold",
+    brideSide: "White & Burnt orange",
+    groomSide: "White & Burnt orange",
   },
   asoebi: [
     {
@@ -114,14 +114,14 @@ const example: WeddingData = {
     {
       group: "Friends of the Groom",
       color: "bg-burnt-orange-100",
-      clothImg: "",
+      clothImg: "public/8b3a872e-78fc-44b9-84eb-65b24ce99044.JPG",
       orderLink:
         "https://wa.me/2348165810242?text=I%20want%20to%20order%20Groom's%20Friends%20cloth",
     },
     {
-      group: "Family of the Bride",
+      group: "Family/friends",
       color: "bg-burnt-orange-100",
-      clothImg: "",
+      clothImg: "public/0DF96B59-C69C-4D21-A948-319D5158B8C8.JPG",
       orderLink:
         "https://wa.me/2348055109185?text=I%20want%20to%20order%20Bride's%20Family%20gele",
     },
@@ -338,9 +338,9 @@ export default function WeddingInvite() {
 </div>
 
         {/* RSVP */}
-        <div className="rounded-xl border bg-white shadow p-6">
+        {/* <div className="rounded-xl border bg-white shadow p-6">
         <GuestRegistration />
-        </div>
+        </div> */}
 
         {/* Gifts */}
         {/* Gifts */}
