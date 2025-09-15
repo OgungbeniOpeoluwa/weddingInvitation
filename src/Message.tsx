@@ -114,14 +114,14 @@ const example: WeddingData = {
     {
       group: "Friends of the Groom",
       color: "bg-burnt-orange-100",
-      clothImg: "public/8b3a872e-78fc-44b9-84eb-65b24ce99044.JPG",
+      clothImg: "/8b3a872e-78fc-44b9-84eb-65b24ce99044.JPG",
       orderLink:
         "https://wa.me/2348165810242?text=I%20want%20to%20order%20Groom's%20Friends%20cloth",
     },
     {
       group: "Family/friends",
       color: "bg-burnt-orange-100",
-      clothImg: "public/0DF96B59-C69C-4D21-A948-319D5158B8C8.JPG",
+      clothImg: "/0DF96B59-C69C-4D21-A948-319D5158B8C8.JPG",
       orderLink:
         "https://wa.me/2348055109185?text=I%20want%20to%20order%20Bride's%20Family%20gele",
     },
